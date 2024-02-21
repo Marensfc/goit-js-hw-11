@@ -1,6 +1,7 @@
 'use strict';
 
-import {refs} from '../main'
+// import {refs} from '../main'
+const gallery = document.querySelector('.gallery');
 
 export function templateImage(image) {
   return `<li class="gallery-card">
@@ -37,5 +38,5 @@ export function createMarkup(images) {
 }
 
 export function markupRender(markup) {
-  refs.gallery.insertAdjacentHTML('afterbegin', markup);
+  gallery.insertAdjacentHTML('afterbegin', markup);
 }

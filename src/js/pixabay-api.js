@@ -26,4 +26,3 @@ export class ImagesAPI {
     return fetch(this.URL).then(response => response.json());
   }
 }
-

@@ -25,12 +25,15 @@ export const refs = {
   inputSearch: document.querySelector('[type="search"]'),
   searchButton: document.querySelector('[type="submit"]'),
   gallery: document.querySelector('.gallery'),
+  loader: document.querySelector('.loader'),
 };
 
 refs.form.addEventListener('submit', fetchOnPixabayAPI);
 
 function fetchOnPixabayAPI(evt) {
   evt.preventDefault();
+  refs.gallery.innerHTML = '';
+  refs.loader.classList.remove('hidden');
 
   const userSearchWords = refs.inputSearch.value.trim();
   const userSearchParams = userSearchWords.split(' ').join('+');
@@ -38,32 +41,41 @@ function fetchOnPixabayAPI(evt) {
   if (userSearchWords !== '') {
     const imagesApi = new ImagesAPI(userSearchParams);
 
-    imagesApi.getImages().then(data => {
-      if (data.hits.length !== 0) {
+    refs.loader.classList.remove('hidden');
 
-        refs.gallery.innerHTML = '';
-        renderFunctions.createMarkup(data.hits);
+    imagesApi
+      .getImages()
+      .then(data => {
+        if (data.hits.length !== 0) {
+          renderFunctions.createMarkup(data.hits);
 
-        let galleryItem = new SimpleLightbox('.gallery a', {
-          captionSelector: 'img',
-          captionsData: 'alt',
-          captionDelay: 250,
-        });
+          let galleryItem = new SimpleLightbox('.gallery a', {
+            captionSelector: 'img',
+            captionsData: 'alt',
+            captionDelay: 250,
+          });
 
-        galleryItem.on('show.simplelightbox');
-        
+          galleryItem.on('show.simplelightbox');
+          galleryItem.refresh();
+
+          refs.form.reset();
+        } else {
+          iziToast.show({
+            ...izitoastMessageOptions,
+            message:
+              'Sorry, there are no images matching your search query. Please try again!',
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      .finally(() => {
+        refs.loader.classList.add('hidden');
         refs.form.reset();
-      } else {
-        iziToast.show({
-          ...izitoastMessageOptions,
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-        });
-      }
-    }).finally(() => {
-      refs.form.reset()
-    });
+      });
   } else {
+    refs.loader.classList.add('hidden');
     iziToast.show(izitoastMessageOptions);
   }
 }
