@@ -4,10 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
+
   <body>
-    
+    <form class="form">
+      <input
+        class="form-input"
+        type="search"
+        name="searchImage"
+        placeholder="Search images..."
+      />
+      <button class="form-btn" type="submit">Search</button>
+    </form>
+
+    <!-- <p class="loader hidden">Loading images, please wait...</p> -->
+
+    <ul class="gallery"></ul>
+
+    <!-- <li class="gallery-card">
+      <div class="gallery-card-wrapper">
+        <div class="thumb">
+          <a href="#" class="gallery-link-image"><img class="gallery-img" src="./img/picture 1.jpg" alt="" /></a>
+        </div>
+        <ul class="statistic-list">
+          <li class="statistic-item">
+            <p class="statistic-name">Likes</p>
+            <p class="statistic-numbers">1813</p>
+          </li>
+          <li class="statistic-item">
+            <p class="statistic-name">Views</p>
+            <p class="statistic-numbers">900290</p>
+          </li>
+          <li class="statistic-item">
+            <p class="statistic-name">Comments</p>
+            <p class="statistic-numbers">229</p>
+          </li>
+          <li class="statistic-item">
+            <p class="statistic-name">Downloads</p>
+            <p class="statistic-numbers">610937</p>
+          </li>
+        </ul>
+      </div>
+    </li> -->
+
     <script src="./main.js" type="module"></script>
+    <script src="./js/pixabay-api.js" type="module"></script>
+    <script src="./js/render-functions.js" type="module"></script>
   </body>
 </html>
