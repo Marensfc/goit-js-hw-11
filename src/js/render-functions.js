@@ -1,6 +1,5 @@
 'use strict';
 
-// import {refs} from '../main'
 const gallery = document.querySelector('.gallery');
 
 export function templateImage(image) {
