@@ -46,10 +46,12 @@ function fetchOnPixabayAPI(evt) {
     imagesApi
       .getImages()
       .then(data => {
+        refs.form.reset();
+
         if (data.hits.length !== 0) {
           renderFunctions.createMarkup(data.hits);
 
-          let galleryItem = new SimpleLightbox('.gallery a', {
+          const galleryItem = new SimpleLightbox('.gallery a', {
             captionSelector: 'img',
             captionsData: 'alt',
             captionDelay: 250,
@@ -57,8 +59,6 @@ function fetchOnPixabayAPI(evt) {
 
           galleryItem.on('show.simplelightbox');
           galleryItem.refresh();
-
-          refs.form.reset();
         } else {
           iziToast.show({
             ...izitoastMessageOptions,
@@ -69,10 +69,13 @@ function fetchOnPixabayAPI(evt) {
       })
       .catch(error => {
         console.log(error);
+        iziToast.show({
+          ...izitoastMessageOptions,
+          message: 'Request error',
+        });
       })
       .finally(() => {
         refs.loader.classList.add('hidden');
-        refs.form.reset();
       });
   } else {
     refs.loader.classList.add('hidden');
